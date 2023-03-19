@@ -36,3 +36,106 @@ A primeira alteração é a inclusão dos 'import' para duas bibliotecas/pacotes
 
 Adicione logo abaixo de ```from pathlib import Path``` as seguintes linhas de código.
 
+```
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+```
+
+Isso irá importar os modulos necessários e também irá carregar o nosso arquivo ```.env``` que guarda a SECRET_KEY.
+
+Agora é necessário corrigir a variável SECRET_KEY para que ela utilize a partir do arquivo ```.env```. Para isso faça a seguinte alteração:
+
+```SECRET_KEY = str(os.getenv("SECRET_KEY"))```
+
+Com isso sua SECRET_KEY não estará disponível diretamente no arquivo ```settings.py```.
+
+# Configuração .gitignore
+
+Antes de inicializarmos um repositório git para o projeto e fazer o upload dos arquivos para o repositório no GitHub, é importante configurar corretamente o arquivo ```.gitignore```.
+
+Primeiro iremos cria-lo, na raiz do nosso projeto. Para isso crie um novo arquivo e nomeie como ```.gitignore```
+
+![image](https://user-images.githubusercontent.com/33090552/226211705-a047b55c-c259-4f55-a552-4d5dd20a81da.png)
+
+O arquivo ".gitignore" é uma ferramenta importante no controle de versão do Git. Ele permite que você especifique quais arquivos e diretórios não devem ser rastreados pelo Git, o que significa que o Git irá ignorá-los ao fazer o commit ou ao sincronizar o repositório com outros colaboradores.
+
+A importância do arquivo ".gitignore" reside em várias razões:
+
+- Evitar a inclusão de arquivos desnecessários: Se você estiver trabalhando em um projeto grande, pode haver muitos arquivos que não precisam ser controlados pelo Git, como arquivos de log, arquivos temporários, arquivos de cache, arquivos de configuração local, etc. Se você não especificar esses arquivos no ".gitignore", o Git irá rastreá-los e isso pode poluir o histórico de commits do repositório.
+
+- Proteger informações sensíveis: Algumas informações, como senhas, chaves de acesso e tokens de autenticação, não devem ser compartilhadas publicamente. O ".gitignore" pode ser usado para excluir arquivos que contenham essas informações, evitando que sejam incluídos em um commit e acidentalmente compartilhados com outros colaboradores.
+
+- Agilizar o processo de commit: Quando o Git tem menos arquivos para rastrear, o processo de commit é mais rápido e eficiente. Isso é especialmente importante em projetos maiores, onde o número de arquivos pode ser muito grande.
+
+- Facilitar a colaboração: Se todos os colaboradores do projeto estiverem usando o mesmo arquivo ".gitignore", eles podem garantir que estão todos trabalhando com o mesmo conjunto de arquivos. Isso evita problemas de conflito e ajuda a manter a consistência do repositório.
+
+Em resumo, o arquivo ".gitignore" é uma ferramenta importante para garantir a integridade do repositório e tornar o processo de controle de versão mais eficiente e seguro. É importante dedicar algum tempo para configurá-lo corretamente para evitar problemas no futuro.
+
+## Gerando .gitignore automaticamente
+
+É possível criar um arquivo ```.gitignore``` corretamente de maneira automatizada a partir do site [gitignore.io](https://www.toptal.com/developers/gitignore/)
+
+Após acessar a página digite "django" no campo de busca e clique em criar.
+
+![image](https://user-images.githubusercontent.com/33090552/226211501-19d42edb-4d81-4b65-b4fc-5ebb1008b1fd.png)
+
+Algo assim aparecerá:
+
+```
+# Created by https://www.toptal.com/developers/gitignore/api/django
+# Edit at https://www.toptal.com/developers/gitignore?templates=django
+
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media
+
+# If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
+# in your Git repository. Update and uncomment the following line accordingly.
+# <django-project-name>/staticfiles/
+
+### Django.Python Stack ###
+# Byte-compiled / optimized / DLL files
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+...
+```
+
+Agora é só copiar todo o conteúdo gerado e colar no arquivo .gitignore do projeto. Não esqueça de salvar o arquivo.
+
+**Certifique-se de copiar todo o conteúdo, são aproximadamente 174 linhas!**
+
+# Publicando o projeto no GitHub
+
+## Primeiro Método - Publicar diretamente a partir do VS Code
+
+Se você estiver usando seu computador e já configurou corretamente o GitHub anteriormente, basta acessar a guia de controle de código-fonte do VS Code, clicar em Publicar no GitHub e seguir os passos que serão solicitados pelo próprio VS Code.
+
+![image](https://user-images.githubusercontent.com/33090552/226211895-1f36978b-5a60-486c-abbc-53889f249777.png)
+
+Dê um nome e escolha se o projeto ficará público ou privado no GitHub.
+
+![image](https://user-images.githubusercontent.com/33090552/226211934-b52883f7-d09f-4f0b-9e0a-bbe957d0db78.png)
+
+Após isso, o repositório será criado e será feito upload (push) de todo conteúdo restreável do seu projeto.
+
+## Segundo Método - Publicar em um repositório criado a partir da página do GitHub
+
