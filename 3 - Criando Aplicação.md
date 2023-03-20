@@ -47,3 +47,7 @@ INSTALLED_APPS = [
   'nome_do_app',
 ]
 ```
+
+A pasta que representa a sua App no projeto aparecerá deste modo, neste exemplo foi criada a App para "produtos":
+
+![image](https://user-images.githubusercontent.com/33090552/226222443-08e2eda8-146c-41ab-8be6-269027e32481.png)
