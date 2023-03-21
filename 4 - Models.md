@@ -182,8 +182,35 @@ Adicionalmente, você pode verificar todos os tipos disponíveis [aqui](https://
                 <p>Observe que isso é diferente de null. null é puramente relacionado ao banco de dados, enquanto blank é relacionado à validação. Se um campo tiver blank=True, a validação do formulário permitirá a entrada de um valor vazio. Se um campo tiver blank=False, o campo será obrigatório.</p>
             </blockquote></details>
             <details><summary><h3>choices</h3></summary><blockquote>
-                <p>Se True, o campo pode ficar em branco. O padrão é False.</p>
-                <p>Observe que isso é diferente de null. null é puramente relacionado ao banco de dados, enquanto blank é relacionado à validação. Se um campo tiver blank=True, a validação do formulário permitirá a entrada de um valor vazio. Se um campo tiver blank=False, o campo será obrigatório.</p>
+                <p>Uma litsa de exatamente dois itens para usar como opções para um campo.</p>
+                <p>O primeiro elemento em cada tupla é o valor real a ser definido no modelo/tabela e o segundo elemento é o nome legível por humanos. Por exemplo:</p>
+                <pre><code class="language-python">YEAR_IN_SCHOOL_CHOICES = [
+    ('FR', 'Freshman'),
+    ('SO', 'Sophomore'),
+    ('JR', 'Junior'),
+    ('SR', 'Senior'),
+    ('GR', 'Graduate'),
+]</code></pre>
+            </blockquote></details>
+            <details><summary><h3>db_column</h3></summary><blockquote>
+                <p>O nome da coluna do banco de dados a ser usada para este campo. Se isso não for fornecido, o Django usará o nome do campo.</p>
+            </blockquote></details>
+            <details><summary><h3>default</h3></summary><blockquote>
+                <p>O valor padrão para o campo. Isso pode ser um valor ou um objeto que pode ser chamado. Se chamável, será chamado toda vez que um novo objeto for criado.</p>
+            </blockquote></details>
+            <details><summary><h3>editable</h3></summary><blockquote>
+                <p>Se False, o campo não será exibido no admin ou em qualquer outro ModelForm. Eles também são ignorados durante a validação do modelo. O padrão é True.</p>
+            </blockquote></details>
+            <details><summary><h3>help_text</h3></summary><blockquote>
+                <p>Texto extra de “ajuda” a ser exibido com o widget de formulário. É útil para documentação, mesmo que seu campo não seja usado em um formulário.</p>
+            </blockquote></details>
+            <details><summary><h3>unique</h3></summary><blockquote>
+                <p>Se True, este campo deve ser único em toda a tabela.</p>
+                <p>Isso é aplicado no nível do banco de dados e pela validação do modelo. Se você tentar salvar um modelo com um valor duplicado em um unique True, um erro será gerado.</p>
+                <p>Esta opção é válida em todos os tipos de campo, exceto ManyToManyField e OneToOneField.</p>
+            </blockquote></details>
+            <details><summary><h3>verbose_name</h3></summary><blockquote>
+                <p>Um nome legível por humanos para o campo. Se o nome detalhado não for fornecido, o Django irá criá-lo automaticamente usando o nome do atributo do campo, convertendo sublinhados em espaços.</p>
             </blockquote></details>
     </blockquote></details></li>
 </ul>
