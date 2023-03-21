@@ -10,6 +10,186 @@ Os models são definidos em arquivos Python no arquivo "models.py" de cada aplic
 
 Em resumo, os models no Django são a base para definir a estrutura de dados de um aplicativo e para armazenar esses dados em um banco de dados. Eles fornecem uma camada de abstração que permite manipular os dados do aplicativo de maneira eficiente e organizada.
 
+## Tipos de Campos
+
+O django oferece varias opções para definirmos tipos de dados que serão armazenados numa tabela. Abaixo estão alguns mais relevantes e seus parâmetros obrigatórios:
+
+Adicionalmente, você pode verificar todos os tipos disponíveis [aqui](https://docs.djangoproject.com/en/3.2/ref/models/fields/#model-field-types)
+
+<ul>
+    <li> <details><summary><h2>Fields de TEXTO</h2></summary><blockquote>
+            <details><summary><h3>CharField</h3></summary><blockquote>
+                <p>Um campo de string, para strings de tamanho pequeno a grande.<br>
+                Para grandes quantidades de texto, use TextField.</p>
+                <h4>Parâmetros:</h4>
+                <ul>
+                <li><code>max_lenght</code> - O comprimento máximo (em caracteres) do campo.</li>
+                </ul>
+            </blockquote></details>
+            <details><summary><h3>TextField</h3></summary><blockquote>
+                <p>Um grande campo de texto.<br>
+                Utilize este tipo de campo ao invés de CharField quando for armazenar textos muito longos.</p>
+                <h4>Não possui parâmetros obrigatórios.</h4>
+            </blockquote></details>
+            <details><summary><h3>EmailField</h3></summary><blockquote>
+                <p>Um CharField que verifica se o valor é um endereço de e-mail válido usando EmailValidator.</p>
+                <h4>Parâmetros:</h4>
+                <ul>
+                <li><code>max_lenght</code> - O comprimento máximo (em caracteres) do campo.</li>
+                </ul>
+            </blockquote></details>
+    </blockquote></details></li>
+    <li> <details><summary><h2>Fields de INTEIROS</h2></summary><blockquote>
+            <details><summary><h3>IntegerField</h3></summary><blockquote>
+                <p>Um número inteiro. Valores de -2147483648 a 2147483647 são seguros em todos os bancos de dados suportados pelo Django.</p>
+                <h4>Não possui parâmetros obrigatórios.</h4>
+            </blockquote></details>
+            <details><summary><h3>SmallIntegerField</h3></summary><blockquote>
+                <p>Um número inteiro. Valores de -2147483648 a 2147483647 são seguros em todos os bancos de dados suportados pelo Django.</p>
+                <h4>Não possui parâmetros obrigatórios.</h4>
+            </blockquote></details>
+            <details><summary><h3>BigIntegerField</h3></summary><blockquote>
+                <p>Um inteiro de 64 bits, muito parecido com um IntegerField, exceto que é garantido que caberá números de -9223372036854775808 a 9223372036854775807.</p>
+                <h4>Não possui parâmetros obrigatórios.</h4>
+            </blockquote></details>
+            <details><summary><h3>PositiveIntegerField</h3></summary><blockquote>
+                <p>Como um IntegerField, mas deve ser positivo ou zero (0).<br>
+                Valores de 0 a 2147483647 são seguros em todos os bancos de dados suportados pelo Django.<br>
+                O valor 0 é aceito por motivos de compatibilidade com versões anteriores.</p>
+                <h4>Não possui parâmetros obrigatórios.</h4>
+            </blockquote></details>
+            <details><summary><h3>PositiveSmallIntegerField</h3></summary><blockquote>
+                <p>Como um PositiveIntegerField, mas só permite valores em um determinado ponto (dependente do banco de dados).<br>
+                Valores de 0 a 32767 são seguros em todos os bancos de dados suportados pelo Django.</p>
+                <h4>Não possui parâmetros obrigatórios.</h4>
+            </blockquote></details>
+            <details><summary><h3>PositiveBigIntegerField</h3></summary><blockquote>
+                <p>Como um PositiveIntegerField, mas só permite valores em um determinado ponto (dependente do banco de dados).<br>
+                Valores de 0 a 9223372036854775807 são seguros em todos os bancos de dados suportados pelo Django.</p>
+                <h4>Não possui parâmetros obrigatórios.</h4>
+            </blockquote></details>
+    </blockquote></details></li>
+    <li> <details><summary><h2>Fields de REAIS/FLOATS</h2></summary><blockquote>
+            <details><summary><h3>DecimalField</h3></summary><blockquote>
+                <p>Um número decimal de precisão fixa, ou seja, este tipo de campo permite que sejam determinados o número máximo de dígitos e casas decimais que serão armazenados.</p>
+                <h4>Parâmetros:</h4>
+                <ul>
+                    <li><code>max_digits</code> - O número total de digitos aceitos, sempre deve ser maior que <code>decimal_places</code>. Por exemplo, para armazenar números até 999 com 2 casas decimais, o valor deve ser 5.</li>
+                    <li><code>decimal_places</code> - O número total de casas decimais.</li>
+                </ul>
+            </blockquote></details>
+            <details><summary><h3>FloatField</h3></summary><blockquote>
+                <p>Um número de ponto flutuante representado em Python por um <code>float</code>.</p>
+                <h4>Não possui parâmetros obrigatórios.</h4>
+            </blockquote></details>
+    </blockquote></details></li>
+    <li> <details><summary><h2>Fields de BOOLEANOS</h2></summary><blockquote>
+            <details><summary><h3>BooleanField</h3></summary><blockquote>
+                <p>Um campo verdadeiro/falso.</p>
+                <h4>Não possui parâmetros obrigatórios.</h4>
+            </blockquote></details>
+    </blockquote></details></li>
+    <li> <details><summary><h2>Fields de DATA e HORA</h2></summary><blockquote>
+            <details><summary><h3>DateField</h3></summary><blockquote>
+                <p>Uma data, representada em Python por uma <code>datetime.date</code>. Tem alguns parâmetros opcionais extras:</p>
+                <h4>Parâmetros:</h4>
+                <ul>
+                    <li><code>auto_now</code> - Define automaticamente o campo como agora toda vez que o objeto for salvo. Útil para carimbos de data/hora de “última modificação”. Observe que a data atual é sempre usada; não é apenas um valor padrão que você pode substituir.</li>
+                    <li><code>auto_now_add</code> - Defina automaticamente o campo como agora quando o objeto for criado pela primeira vez.</li>
+                </ul>
+            </blockquote></details>
+            <details><summary><h3>DateTimeField</h3></summary><blockquote>
+                <p>Uma data e hora, representadas em Python por uma <code>datetime.datetime</code>. Recebe os mesmos argumentos extras que DateField.</p>
+                <h4>Parâmetros:</h4>
+                <ul>
+                    <li><code>auto_now</code> - Define automaticamente o campo como agora toda vez que o objeto for salvo. Útil para carimbos de data/hora de “última modificação”. Observe que a data atual é sempre usada; não é apenas um valor padrão que você pode substituir.</li>
+                    <li><code>auto_now_add</code> - Defina automaticamente o campo como agora quando o objeto for criado pela primeira vez.</li>
+                </ul>
+            </blockquote></details>
+            <details><summary><h3>TimeField</h3></summary><blockquote>
+                <p>Uma hora, representada em Python por uma <code>datetime.time</code>. Aceita as mesmas opções de preenchimento automático que DateField.</p>
+                <h4>Parâmetros:</h4>
+                <ul>
+                    <li><code>auto_now</code> - Define automaticamente o campo como agora toda vez que o objeto for salvo. Útil para carimbos de data/hora de “última modificação”. Observe que a data atual é sempre usada; não é apenas um valor padrão que você pode substituir.</li>
+                    <li><code>auto_now_add</code> - Defina automaticamente o campo como agora quando o objeto for criado pela primeira vez.</li>
+                </ul>
+            </blockquote></details>
+            <blockquote><p><img src="https://img.shields.io/badge/-IMPORTANTE-orange"><br>
+            As opções <code>auto_now_add</code>, <code>auto_now</code>, e <code>default</code> são mutuamente exclusivas, ou seja, só é possível utilizar uma opção de cada vez. Qualquer combinação dessas opções resultará em um erro.</p>
+            <p><img src="https://img.shields.io/badge/-OBSERVAÇÃO-green"><br>
+            As opções <code>auto_now</code> e <code>auto_now_add</code> sempre usarão a data no fuso horário padrão, aquele definido no arquivo <code>settings.py</code>, no momento da criação ou atualização.</p></blockquote>
+    </blockquote></details></li>
+    <li> <details><summary><h2>Fields para ARQUIVOS</h2></summary><blockquote>
+            <details><summary><h3>FileField</h3></summary><blockquote>
+                <p>Um campo de upload de arquivo.</p>
+                <h4>Parâmetros:</h4>
+                <ul>
+                    <li><code>upload_to</code> - Esse atributo fornece uma maneira de definir o diretório de upload.</li>
+                </ul><br>
+                <p><img src="https://img.shields.io/badge/-EXEMPLOS-blue"></p>
+                <p>O arquivo será armazenado em <code>MEDIA_ROOT/uploads</code><br>
+                    <code>upload = models.FileField(upload_to='uploads/')</code></p>
+                <p>O arquivo será armazenado em <code>MEDIA_ROOT/uploads/2023/03/20</code><br>
+                    <code>upload = models.FileField(upload_to='uploads/%Y/%m/%d/')</code></p>
+                <p><a href="https://docs.python.org/3/library/time.html#time.strftime">Mais opções e informações sobre formatação de data e hora.</p>
+            </blockquote></details>
+            <details><summary><h3>ImageField</h3></summary><blockquote>
+                <p>Herda todos os atributos e métodos de FileField, mas também valida se o objeto carregado é uma imagem válida.</p>
+                <p>Além dos atributos especiais que estão disponíveis para FileField, ImageField também possui atributos height e width.</p>
+                <h4>Parâmetros:</h4>
+                <ul>
+                    <li><code>height_field</code> - Nome de um campo de modelo que será preenchido automaticamente com a altura da imagem sempre que a instância do modelo for salva.</li>
+                    <li><code>width_field</code> - Nome de um campo de modelo que será preenchido automaticamente com a largura da imagem sempre que a instância do modelo for salva.</li>
+                </ul><br>
+                <p><img src="https://img.shields.io/badge/-IMPORTANTE-orange"><br>
+                Requer a biblioteca <code>Pillow</code>. Para instalar execute <code>pip install Pillow</code></p>
+                <p><img src="https://img.shields.io/badge/-OBSERVAÇÃO-green"><br>
+                ImageField é criado em seu banco de dados como texto com um comprimento máximo padrão de 100 caracteres. Assim como em outros campos, você pode alterar o comprimento máximo usando o parâmetro <code>max_length</code></p>
+            </blockquote></details>
+    </blockquote></details></li>
+    <li> <details><summary><h2>Fields de RELACIONAMENTO</h2></summary><blockquote>
+            <details><summary><h3>ForeignKey</h3></summary><blockquote>
+                <p>Uma relação muitos-para-um. Requer dois parâmetros: a classe à qual o modelo está relacionado e a on_delete.</p>
+                <h4>Parâmetros:</h4>
+                <ul>
+                    <li><code>PARAM</code> - PARAM_TEXT</li>
+                </ul><br>
+            </blockquote></details>
+            <details><summary><h3>ManyToManyField</h3></summary><blockquote>
+                <p>FIELD_TEXT</p>
+                <h4>Parâmetros:</h4>
+                <ul>
+                    <li><code>PARAM</code> - PARAM_TEXT</li>
+                </ul><br>
+            </blockquote></details>
+            <details><summary><h3>OneToOneField</h3></summary><blockquote>
+                <p>FIELD_TEXT</p>
+                <h4>Parâmetros:</h4>
+                <ul>
+                    <li><code>PARAM</code> - PARAM_TEXT</li>
+                </ul><br>
+            </blockquote></details>
+    </blockquote></details></li>
+    <li> <details><summary><h2>Parâmetros adicionais opcionais</h2></summary><blockquote>
+            <p>Os argumentos a seguir estão disponíveis para todos os tipos de campo. Todos são opcionais.</p>
+            <details><summary><h3>null</h3></summary><blockquote>
+                <p>Se True, o Django armazenará valores vazios como NULL no banco de dados. O padrão é False.</p>
+                <p>Evite usar null em campos baseados em string, como CharField e TextField. Se um campo baseado em string tiver null=True, isso significa que ele tem dois valores possíveis para “sem dados”: NULL, e a string vazia. Na maioria dos casos, é redundante ter dois valores possíveis para “sem dados”; a convenção do Django é usar a string vazia, não NULL. Uma exceção é quando a CharField tem ambos unique=True e blank=True definido. Nessa situação, null=True é necessário evitar violações de restrição única ao salvar vários objetos com valores em branco.</p>
+                <p>Para campos baseados em string e não baseados em string, você também precisará definir blank=True se deseja permitir valores vazios em formulários, pois o parâmetro null afeta apenas o armazenamento do banco de dados (consulte Recursos blank).</p>
+            </blockquote></details>
+            <details><summary><h3>blank</h3></summary><blockquote>
+                <p>Se True, o campo pode ficar em branco. O padrão é False.</p>
+                <p>Observe que isso é diferente de null. null é puramente relacionado ao banco de dados, enquanto blank é relacionado à validação. Se um campo tiver blank=True, a validação do formulário permitirá a entrada de um valor vazio. Se um campo tiver blank=False, o campo será obrigatório.</p>
+            </blockquote></details>
+            <details><summary><h3>choices</h3></summary><blockquote>
+                <p>Se True, o campo pode ficar em branco. O padrão é False.</p>
+                <p>Observe que isso é diferente de null. null é puramente relacionado ao banco de dados, enquanto blank é relacionado à validação. Se um campo tiver blank=True, a validação do formulário permitirá a entrada de um valor vazio. Se um campo tiver blank=False, o campo será obrigatório.</p>
+            </blockquote></details>
+    </blockquote></details></li>
+</ul>
+
+
+
 ## Criando uma tabela para dados do Produto
 
 Abra o arquivo ```models.py``` na pasta ```produtos``` que representa nossa App.
@@ -53,8 +233,6 @@ Esse relacionamento é definido usando o tipo ForeignKey, que indica que a chave
 Os relacionamentos entre tabelas SQL são importantes para permitir que os dados sejam organizados de maneira lógica e eficiente em diferentes tabelas, ao mesmo tempo que permitem que as tabelas sejam interconectadas para recuperar informações de maneira mais fácil e rápida. Esses relacionamentos são criados usando chaves estrangeiras, que permitem que uma tabela faça referência a outra tabela, usando uma coluna que contém os valores que correspondem a outra coluna em outra tabela.
 
 Ao usar relacionamentos entre tabelas, podemos criar estruturas de banco de dados complexas que permitem que os dados sejam armazenados de maneira organizada e consistente, enquanto também permitimos a recuperação de informações de várias tabelas relacionadas de maneira eficiente. Isso é especialmente importante em aplicativos complexos que precisam gerenciar muitos tipos diferentes de dados e relacionamentos entre esses dados.
-
-Você pode verificar todos os tipos disponíveis de campos [aqui](https://docs.djangoproject.com/en/3.2/ref/models/fields/#model-field-types)
 
 ## Preparando a migração
 
